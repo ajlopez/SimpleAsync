@@ -4,7 +4,7 @@ var async = require('..');
 exports['then one step'] = function (test) {
     test.async();
     
-    var total;
+    var total = 0;
     
     var seq = async().then(function (data) {
         total += data;
@@ -14,5 +14,5 @@ exports['then one step'] = function (test) {
     });
     
     test.ok(seq);
-    seq.run(10);
+    test.strictEqual(seq.run(10), seq);
 }
