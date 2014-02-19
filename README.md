@@ -17,7 +17,82 @@ Reference in your program:
 ```js
 var async = require('simpleasync');
 ```
-[TBD] (see tests).
+
+Define and run steps with then:
+```js
+async()
+    .then(function (data) {
+        console.log(data);
+        return data + 1;
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+    .run(10);
+```
+
+Expected output
+```
+10
+11
+```
+
+Define and run steps with one step using a callback. Then, you can write async steps:
+```js
+async()
+    .then(function (data, next) {
+        console.log(data);
+        next(null, data + 1); // callback(err, newdata);
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+    .run(10);
+```
+
+Expected output
+```
+10
+11
+```
+
+Use else for catch errors:
+```js
+async()
+    .then(function (data) {
+        console.log(data);
+        throw "Houston, we have a problem";
+    })
+    .else(function (err) {
+        console.log('error:', err);
+    })
+    .run(10);
+```
+
+Expected output
+```
+10
+error: Houston, we have a problem
+```
+
+Raise an error in an step with callback
+```js
+async()
+    .then(function (data, next) {
+        console.log(data);
+        next("Houston, we have a problem", null);
+    })
+    .else(function (err) {
+        console.log('error:', err);
+    })
+    .run(10);
+```
+
+Expected output
+```
+10
+error: Houston, we have a problem
+```
 
 ## Development
 
