@@ -48,7 +48,7 @@ exports['then with one async step and one sync step'] = function (test) {
         .then(function (data, next) {
             total += data;
             setImmediate(function () {
-                next(data);
+                next(null, data);
             });
         })
         .then(function (data) {
