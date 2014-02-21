@@ -5,7 +5,7 @@ async()
         console.log(data);
         next("Houston, we have a problem", null);
     })
-    .else(function (err) {
+    .catch(function (err) {
         console.log('error:', err);
     })
     .run(10);
