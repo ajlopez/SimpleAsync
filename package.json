@@ -1,7 +1,7 @@
 { "name": "simpleasync"
 , "description": "Simple flow library to chain and run functions with asynchronous calls"
 , "keywords": [ "node", "asynchronous", "library" ]
-, "version": "0.0.1"
+, "version": "0.0.2"
 , "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
 , "repository": { "type": "git", "url": "git://github.com/ajlopez/SimpleAsync.git" }
 , "main": "./lib/simpleasync.js"
