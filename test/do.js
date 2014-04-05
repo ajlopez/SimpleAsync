@@ -43,4 +43,23 @@ exports['do two async functions'] = function (test) {
     test.strictEqual(seq.run(1), seq);
 }
 
+exports['do two async functions with error'] = function (test) {
+    test.async();
+    
+    var total = 0;
+    
+    var seq = async()
+        .do(function (data, next) { next(null, data + 1); })
+        .do(function (data, next) { next('error'); })
+        .then(function (data) {
+        })
+        .catch(function (err) {
+            test.ok(err);
+            test.equal(err, 'error');
+            test.done();
+        });
+    
+    test.ok(seq);
+    test.strictEqual(seq.run(1), seq);
+}
 
