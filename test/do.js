@@ -2,6 +2,7 @@
 var async = require('..');
 
 exports['do two functions'] = function (test) {
+    console.log('do two functions');
     test.async();
     
     var total = 0;
@@ -23,6 +24,7 @@ exports['do two functions'] = function (test) {
 }
 
 exports['do two async functions'] = function (test) {
+    console.log('do two async functions');
     test.async();
     
     var total = 0;
@@ -44,6 +46,7 @@ exports['do two async functions'] = function (test) {
 }
 
 exports['do two async functions with error'] = function (test) {
+    console.log('do two async functions with error');
     test.async();
     
     var total = 0;
