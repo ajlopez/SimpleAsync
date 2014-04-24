@@ -53,7 +53,7 @@ exports['do two async functions with error'] = function (test) {
         .do(function (data, next) { next('error'); })
         .then(function (data) {
         })
-        .catch(function (err) {
+        .fail(function (err) {
             test.ok(err);
             test.equal(err, 'error');
             test.done();
