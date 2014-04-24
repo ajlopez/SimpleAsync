@@ -56,14 +56,14 @@ Expected output
 11
 ```
 
-Use catch for catch errors:
+Use `fail` for catch errors:
 ```js
 async()
     .then(function (data) {
         console.log(data);
         throw "Houston, we have a problem";
     })
-    .catch(function (err) {
+    .fail(function (err) {
         console.log('error:', err);
     })
     .run(10);
@@ -82,7 +82,7 @@ async()
         console.log(data);
         next("Houston, we have a problem", null);
     })
-    .catch(function (err) {
+    .fail(function (err) {
         console.log('error:', err);
     })
     .run(10);
