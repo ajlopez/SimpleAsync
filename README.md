@@ -187,6 +187,7 @@ TBD
 - 0.0.1: Published
 - 0.0.2: Published
 - 0.0.3: Published. do with sync and async functions. map async function support
+- 0.0.4: Published, fail function
 
 ## License
 
