@@ -188,6 +188,7 @@ TBD
 - 0.0.2: Published
 - 0.0.3: Published. do with sync and async functions. map async function support
 - 0.0.4: Published, fail function
+- 0.0.5: Published, fix async map with empty array
 
 ## License
 
