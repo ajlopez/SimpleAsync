@@ -69,3 +69,29 @@ exports['map empty array with async fn and then'] = function (test) {
     test.ok(seq);
     test.strictEqual(seq.run([]), seq);
 }
+
+exports['map with error'] = function (test) {
+    test.async();
+    
+    var total = 0;
+    
+    var seq = async()
+        .map(function (item, next) {
+            if (item == 2)
+                next("error", null);
+            else
+                next(null, item * item);
+        })
+        .then(function (data) {
+            test.fail();
+        })
+        .fail(function (err) {
+            test.equal(err, "error");
+
+            test.done();
+        });
+    
+    test.ok(seq);
+    test.strictEqual(seq.run([1,2,3]), seq);
+}
+
