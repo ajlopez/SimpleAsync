@@ -146,6 +146,12 @@ Expected output
 ```
 [ 6, 9, 12 ]
 ```
+The asynchronous functions accepted by a consecutive series of `do` are executed with concurrency. The data collected
+by the functions are assembled in an array, that is the data feeded into the next step. In the above example, the three
+async functions of `do` returned and array with
+```
+[ 2, 3, 4 ]
+```
 
 `map` accepts function with callback, too:
 ```js
@@ -190,6 +196,7 @@ TBD
 - 0.0.4: Published, fail function
 - 0.0.5: Published, fix async map with empty array
 - 0.0.6: Published, use setTimeout instead setImmediate
+- 0.0.7: Published, improved do implementation, engine versions updated
 
 ## License
 
