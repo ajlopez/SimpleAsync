@@ -7,6 +7,7 @@ exports['map and then'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data([1, 2, 3])
         .map(function (item) {
             return item * item;
         })
@@ -22,7 +23,6 @@ exports['map and then'] = function (test) {
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run([1,2,3]), seq);
 }
 
 exports['map with async fn and then'] = function (test) {
@@ -31,6 +31,7 @@ exports['map with async fn and then'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data([1, 2, 3])
         .map(function (item, next) {
             next(null, item * item);
         })
@@ -46,7 +47,6 @@ exports['map with async fn and then'] = function (test) {
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run([1,2,3]), seq);
 }
 
 exports['map empty array with async fn and then'] = function (test) {
@@ -55,6 +55,7 @@ exports['map empty array with async fn and then'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data([])
         .map(function (item, next) {
             next(null, item * item);
         })
@@ -67,7 +68,6 @@ exports['map empty array with async fn and then'] = function (test) {
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run([]), seq);
 }
 
 exports['map with error'] = function (test) {
@@ -76,6 +76,7 @@ exports['map with error'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data([1, 2, 3])
         .map(function (item, next) {
             if (item == 2)
                 next("error", null);
@@ -85,13 +86,12 @@ exports['map with error'] = function (test) {
         .then(function (data) {
             test.fail();
         })
-        .fail(function (err) {
+        .error(function (err) {
             test.equal(err, "error");
 
             test.done();
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run([1,2,3]), seq);
 }
 

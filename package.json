@@ -7,7 +7,7 @@
 , "main": "./lib/simpleasync.js"
 , "engines": { "node": ">= 0.10.0" }
 , "scripts": {
-    "test": "simpleunit test"
+    "test": "simpleunit ./test -r"
   }
 , "dependencies": {
   }

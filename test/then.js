@@ -7,6 +7,7 @@ exports['then one step'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data(10)
         .then(function (data) {
             total += data;
             
@@ -15,7 +16,6 @@ exports['then one step'] = function (test) {
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run(10), seq);
 }
 
 exports['then with two sync steps'] = function (test) {
@@ -24,6 +24,7 @@ exports['then with two sync steps'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data(6)
         .then(function (data) {
             total += data;
             return data;
@@ -36,7 +37,6 @@ exports['then with two sync steps'] = function (test) {
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run(6), seq);
 }
 
 exports['then with one async step and one sync step'] = function (test) {
@@ -45,6 +45,7 @@ exports['then with one async step and one sync step'] = function (test) {
     var total = 0;
     
     var seq = async()
+        .data(6)
         .then(function (data, next) {
             total += data;
             setImmediate(function () {
@@ -59,5 +60,5 @@ exports['then with one async step and one sync step'] = function (test) {
         });
     
     test.ok(seq);
-    test.strictEqual(seq.run(6), seq);
 }
+
