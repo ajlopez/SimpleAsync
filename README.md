@@ -18,7 +18,7 @@ Reference in your program:
 var async = require('simpleasync');
 ```
 
-In the following samples, `next` is a callback function with signature `function (err, data)...`
+In the following samples, `next` is a function `function (err, data)...`
 
 Define and run steps with data and then:
 ```js
