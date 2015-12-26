@@ -161,7 +161,7 @@ TBD
 - 0.0.5: Published, fix async map with empty array
 - 0.0.6: Published, use setTimeout instead setImmediate
 - 0.0.7: Published, improved do implementation, engine versions updated
-- 0.0.8: To be published, fail and run deprecated, new data method, removing support for sync functions, autorun, exec method to inject async data
+- 0.0.8: Published, fail and run deprecated, new data method, removing support for sync functions, autorun, exec method to inject async data
 
 ## License
 
