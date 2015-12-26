@@ -18,10 +18,31 @@ Reference in your program:
 var async = require('simpleasync');
 ```
 
-Define and run steps with then:
+In the following samples, `next` is a callback function with signature `function (err, data)...`
+
+Define and run steps with data and then:
 ```js
 async()
     .data(10)
+    .then(function (data, next) {
+        console.log(data);
+        next(null, data + 1);
+    })
+    .then(function (data, next) {
+        console.log(data);
+    });
+```
+
+Expected output
+```
+10
+11
+```
+
+Use exec to inject asynchronous data:
+```js
+async()
+    .exec(function (next) { next(null, 10); })
     .then(function (data, next) {
         console.log(data);
         next(null, data + 1);

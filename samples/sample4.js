@@ -1,11 +1,11 @@
-var async = require('./lib/simpleasync');
+var async = require('..');
 
 async()
+    .data(10)
     .then(function (data, next) {
         console.log(data);
         next("Houston, we have a problem", null);
     })
-    .fail(function (err) {
+    .error(function (err) {
         console.log('error:', err);
     })
-    .run(10);
