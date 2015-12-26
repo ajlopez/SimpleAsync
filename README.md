@@ -21,33 +21,14 @@ var async = require('simpleasync');
 Define and run steps with then:
 ```js
 async()
-    .then(function (data) {
-        console.log(data);
-        return data + 1;
-    })
-    .then(function (data) {
-        console.log(data);
-    })
-    .run(10);
-```
-
-Expected output
-```
-10
-11
-```
-
-Define and run steps with one step using a callback. Then, you can write async steps:
-```js
-async()
+    .data(10)
     .then(function (data, next) {
         console.log(data);
-        next(null, data + 1); // callback(err, newdata);
+        next(null, data + 1);
     })
-    .then(function (data) {
+    .then(function (data, next) {
         console.log(data);
-    })
-    .run(10);
+    });
 ```
 
 Expected output
@@ -56,17 +37,17 @@ Expected output
 11
 ```
 
-Use `fail` for catch errors:
+Use `error` for catch errors:
 ```js
 async()
-    .then(function (data) {
+    .data(10)
+    .then(function (data, next) {
         console.log(data);
         throw "Houston, we have a problem";
     })
-    .fail(function (err) {
+    .error(function (err) {
         console.log('error:', err);
-    })
-    .run(10);
+    });
 ```
 
 Expected output
@@ -78,14 +59,14 @@ error: Houston, we have a problem
 Raise an error in an step with callback
 ```js
 async()
+    .data(10)
     .then(function (data, next) {
         console.log(data);
         next("Houston, we have a problem", null);
     })
-    .fail(function (err) {
+    .error(function (err) {
         console.log('error:', err);
     })
-    .run(10);
 ```
 
 Expected output
@@ -97,13 +78,13 @@ error: Houston, we have a problem
 `do` function generate an element of an array, to be received by the next `then` or `map` in sequence:
 ```js
 async()
-    .do(function (data) { return data + 1; })
-    .do(function (data) { return data + 2; })
-    .do(function (data) { return data + 3; })
+    .data(1)
+    .do(function (data, next) { next(null, data + 1); })
+    .do(function (data, next) { next(null, data + 2); })
+    .do(function (data, next) { next(null, data + 3); })
     .then(function (data) {
         console.dir(data);
-    })
-    .run(1);
+    });
 ```
 
 Expected output
@@ -114,62 +95,24 @@ Expected output
 `map` take each element of the previous array and generate a new element
 ```js
 async()
-    .do(function (data) { return data + 1; })
-    .do(function (data) { return data + 2; })
-    .do(function (data) { return data + 3; })
-    .map(function (data) { return data * 3; })
-    .then(function (data) {
-        console.dir(data);
-    })
-    .run(1);
-```
-
-Expected output
-```
-[ 6, 9, 12 ]
-```
-
-`do` accepts function with callback:
-```js
-async()
+    .data(1)
     .do(function (data, next) { next(null, data + 1); })
     .do(function (data, next) { next(null, data + 2); })
     .do(function (data, next) { next(null, data + 3); })
-    .map(function (data) { return data * 3; })
+    .map(function (data, next) { next(null, data * 3); })
     .then(function (data) {
         console.dir(data);
-    })
-    .run(1);
+    });
 ```
 
 Expected output
 ```
 [ 6, 9, 12 ]
 ```
+
 The asynchronous functions accepted by a consecutive series of `do` are executed with concurrency. The data collected
-by the functions are assembled in an array, that is the data feeded into the next step. In the above example, the three
-async functions of `do` returned and array with
-```
-[ 2, 3, 4 ]
-```
+by the functions are assembled in an array, that is the data feeded into the next step.
 
-`map` accepts function with callback, too:
-```js
-async()
-    .do(function (data, next) { next(null, data + 1); })
-    .do(function (data, next) { next(null, data + 2); })
-    .do(function (data, next) { next(null, data + 3); })
-    .map(function (data, next) { next(null, data * data); })
-    .then(function (data) {
-        console.dir(data);
-    })
-    .run(1);
-```
-
-Expected output
-```
-[ 4, 9, 16 ]
-```
 
 ## Development
 
